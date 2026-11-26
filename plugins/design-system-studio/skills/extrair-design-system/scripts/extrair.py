@@ -82,6 +82,10 @@ def _nome(args_nome: str | None, pag: pagina.Pagina) -> str:
     return host.removeprefix("www.")
 
 
+def _plural(n: int, singular: str, plural: str) -> str:
+    return f"{n} {singular if n == 1 else plural}"
+
+
 def _conferir_saida(saida: Path, sobrescrever: bool) -> None:
     if saida.exists() and not saida.is_dir():
         raise UsoInvalido(f"--saida aponta para um arquivo: {saida}")
@@ -125,7 +129,8 @@ def extrair(args) -> tuple[Extracao, Path, list[tuple[str, str, str]]]:
     nomes = {"texto": "texto", "titulos": "títulos", "mono": "código"}
     familias = ", ".join(f"{f.familia} ({nomes[papel]})" for papel, f in tipos.papeis.items())
     linhas.append(("OK", "fontes", f"{familias}; {len(tipos.tamanhos)} tamanhos"))
-    linhas.append(("OK", "medidas", f"{len(med.raios)} raios, {len(med.sombras)} sombras, {len(med.espacos)} espaços"))
+    linhas.append(("OK", "medidas", ", ".join(_plural(len(v), s, p) for v, s, p in (
+        (med.raios, "raio", "raios"), (med.sombras, "sombra", "sombras"), (med.espacos, "espaço", "espaços")))))
     resumo_comp = ", ".join(f"{c.nome.lower()} {len(c.regras)}" for c in comps) or "nenhum reconhecido"
     linhas.append(("OK", "componentes", resumo_comp))
 

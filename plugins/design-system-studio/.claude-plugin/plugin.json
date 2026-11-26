@@ -1,0 +1,20 @@
+{
+  "name": "design-system-studio",
+  "version": "0.1.0",
+  "description": "A partir da URL de um site, gera de forma determinística, sem IA e sem rodar o JavaScript do site, a estrutura de design system: DESIGN.md com as decisões explicadas, tokens.css, components.css, vitrine index.html e assets com logo, favicon e ícones. A IA revisa e completa.",
+  "license": "MIT",
+  "author": {
+    "name": "Nathan Amorim",
+    "url": "https://github.com/nathanramorim"
+  },
+  "repository": "https://github.com/nathanramorim/design-system-studio",
+  "keywords": [
+    "design-system",
+    "tokens",
+    "css",
+    "paleta",
+    "tipografia",
+    "style-guide",
+    "identidade-visual"
+  ]
+}

@@ -2,7 +2,7 @@
 
 **Branch:** `feat/43c3-extrator` (única da iniciativa)
 **Depende de:** feat-43c3-01, feat-43c3-02
-**Status:** `queued`
+**Status:** `review_pending`
 **Origem:** `sdd/discovery/43c3-extrator/plan.md`
 
 ## Objetivo
@@ -30,5 +30,5 @@ TST-01, TST-05, COD-02, DUP-02
 uv run --with pytest pytest -q tests/test_skill.py tests/test_publico.py
 uv run --with ruff ruff check
 ```
-- [ ] versão 0.1.0 igual em `plugin.json`, `pyproject.toml` e README
-- [ ] nenhum dado de cliente nem caminho pessoal no repositório
+- [x] versão 0.1.0 igual em `plugin.json`, `pyproject.toml` e README
+- [x] nenhum dado de cliente nem caminho pessoal no repositório
