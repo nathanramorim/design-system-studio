@@ -1,0 +1,22 @@
+{
+  "$schema": "forge-sdd/metrics/1.0",
+  "feature": "sdd/discovery/43c3-extrator/features/feat-43c3-03-empacotamento.md",
+  "phase": "43c3-03",
+  "agent_path": [
+    "builder"
+  ],
+  "tokens_input": 1291,
+  "tokens_output": 500,
+  "turns": 0,
+  "duration_seconds": 0,
+  "criterio_atendido": true,
+  "model": "claude-opus-5-5",
+  "rework_lines": 0,
+  "context7_calls": 0,
+  "git_calls": 0,
+  "files_touched": null,
+  "outcome": "approved",
+  "sdd_version": "5.2.2-beta",
+  "medicao": "estimado",
+  "complexidade": null
+}

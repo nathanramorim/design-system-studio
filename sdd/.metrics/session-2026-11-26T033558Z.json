@@ -1,0 +1,37 @@
+{
+  "$schema": "forge-sdd/metrics/1.0",
+  "feature": "sdd/discovery/43c3-extrator/discovery.md",
+  "phase": "43c3",
+  "agent_path": [
+    "orquestrador",
+    "builder"
+  ],
+  "tokens_input": 3646,
+  "tokens_output": 2937,
+  "turns": 0,
+  "duration_seconds": 0,
+  "criterio_atendido": true,
+  "model": "claude-opus-5-5",
+  "rework_lines": 0,
+  "context7_calls": 0,
+  "git_calls": 0,
+  "files_touched": [
+    "sdd/discovery/43c3-extrator/discovery.md",
+    "sdd/discovery/43c3-extrator/criteria.md",
+    "sdd/discovery/43c3-extrator/plan.md",
+    "sdd/discovery/43c3-extrator/status.md"
+  ],
+  "outcome": "approved",
+  "sdd_version": "5.2.2-beta",
+  "medicao": "estimado",
+  "complexidade": null,
+  "spec": {
+    "tipo": "discovery",
+    "iniciativa": "43c3-extrator",
+    "bytes": 3646,
+    "criteria_bytes": 6755,
+    "plan_bytes": 1061,
+    "status_bytes": 286,
+    "features_count": 3
+  }
+}
