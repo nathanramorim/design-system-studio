@@ -1,4 +1,4 @@
-"""Repositório público: versão igual nos manifestos e nada de dado pessoal, segredo ou caminho da máquina."""
+"""Repositório público: versão igual nos manifestos e nada de dado pessoal, token ou caminho da máquina (chaves privadas: forge gate, P-13)."""
 
 from __future__ import annotations
 
@@ -11,7 +11,6 @@ from conftest import PLUGIN, RAIZ
 PROIBIDOS = {
     "e-mail": re.compile(r"[\w.+-]+@[\w-]+\.(?:com|br|net|org|io)\b"),
     "caminho pessoal": re.compile(r"/(?:Users|home)/[A-Za-z]"),
-    "chave privada": re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
     "chave AWS": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
     "token GitHub": re.compile(r"\bgh[pousr]_[A-Za-z0-9]{30,}\b"),
 }
