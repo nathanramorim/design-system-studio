@@ -1,19 +1,22 @@
 # Constituição — design-system-studio
 
 ## Missão
-[Uma frase descrevendo o que o sistema faz]
+Plugin com a skill `extrair-design-system`: a partir da URL de um site, gera de forma determinística a estrutura de design system (`DESIGN.md`, `tokens.css`, `components.css`, `index.html` e `assets/`) para a IA revisar.
 
 ## Stack
 | Camada | Escolha | Motivo |
 |--------|---------|--------|
-| Runtime | python | |
-| DB | none | |
-| Config | | |
-| Secrets | | |
+| Runtime | python | Python 3.11+ via uv (PEP 723); só stdlib no plugin |
+| DB | none | Sem estado persistido |
+| Config | opções do CLI | Sem arquivo de configuração |
+| Secrets | nenhum | O plugin não usa chave nem conta |
 
 ## Decisões resolvidas
 | Decisão | Resolução |
 |---------|-----------|
+| Distribuição | Plugin do Claude Code (marketplace na raiz, plugin em `plugins/design-system-studio/`) e skill copiável para o agy |
+| Público | Nenhum dado de cliente; exemplos com o site fictício `site-exemplo` |
+| Validação | Local, com pytest e ruff; sem CI |
 
 ## Ferramentas e Integrações
 | Campo | Valor |

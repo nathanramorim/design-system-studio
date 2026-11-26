@@ -1,0 +1,63 @@
+{
+  "feature_id": "",
+  "branch": "feat/43c3-extrator",
+  "base_branch": "main",
+  "spec_status": "reviewed",
+  "updated_at": "2026-11-26T03:32:53Z",
+  "items": [
+    {
+      "task_id": "43c3-01",
+      "title": "feat-43c3-01: Extrator `extrair.py`",
+      "spec_path": "sdd/discovery/43c3-extrator/features/feat-43c3-01-extrator.md",
+      "status": "review_pending",
+      "rules": [
+        "ARQ-04",
+        "ARQ-06",
+        "ARQ-11",
+        "COD-01",
+        "COD-03",
+        "SEG-01",
+        "SEG-05",
+        "TST-01"
+      ],
+      "skills_used": [],
+      "attempts": 1
+    },
+    {
+      "task_id": "43c3-02",
+      "title": "feat-43c3-02: Skill, referências e comando",
+      "spec_path": "sdd/discovery/43c3-extrator/features/feat-43c3-02-skill.md",
+      "status": "review_pending",
+      "depends_on": [
+        "feat-43c3-01"
+      ],
+      "rules": [
+        "ARQ-06",
+        "ARQ-11",
+        "COD-05",
+        "DUP-01"
+      ],
+      "skills_used": [],
+      "attempts": 1
+    },
+    {
+      "task_id": "43c3-03",
+      "title": "feat-43c3-03: Empacotamento, README e versão 0.1.0",
+      "spec_path": "sdd/discovery/43c3-extrator/features/feat-43c3-03-empacotamento.md",
+      "status": "review_pending",
+      "depends_on": [
+        "feat-43c3-01",
+        "feat-43c3-02"
+      ],
+      "rules": [
+        "ARQ-11",
+        "COD-02",
+        "DUP-02",
+        "TST-01",
+        "TST-05"
+      ],
+      "skills_used": [],
+      "attempts": 1
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${titulo}</title>
+${favicon}${google_fonts}<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+.vt-pagina { box-sizing: border-box; margin: 0 auto; max-width: 1120px; padding: 40px 20px 64px; background: var(--ds-cor-fundo); color: var(--ds-cor-texto); font-family: var(--ds-fonte-texto); line-height: 1.5; overflow-wrap: anywhere; }
+.vt-pagina *, .vt-pagina *::before, .vt-pagina *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ds-cor-fundo); }
+.vt-topo h1, .vt-secao h2, .vt-secao h3 { font-family: var(--ds-fonte-titulos); margin: 0; line-height: 1.2; }
+.vt-topo h1 { font-size: 36px; margin-top: 16px; }
+.vt-topo p { margin: 8px 0 0; max-width: 72ch; opacity: .8; }
+.vt-logo { display: block; max-height: 56px; max-width: 240px; width: auto; }
+.vt-indice { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: 14px; }
+.vt-secao { border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent); margin-top: 40px; padding-top: 32px; }
+.vt-secao h2 { font-size: 24px; }
+.vt-secao h3 { font-size: 16px; margin-top: 24px; }
+.vt-nota { font-size: 14px; margin: 6px 0 0; max-width: 72ch; opacity: .8; }
+.vt-grade { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); margin-top: 16px; }
+.vt-cor { border: 1px solid color-mix(in srgb, currentColor 18%, transparent); border-radius: 10px; font-size: 12px; min-height: 88px; padding: 10px; }
+.vt-cor b { display: block; font-size: 13px; }
+.vt-papel { display: grid; gap: 4px; margin-top: 16px; }
+.vt-fonte { font-size: 28px; margin: 4px 0 0; }
+.vt-escala p { margin: 8px 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vt-barra { background: var(--ds-cor-primaria); border-radius: 4px; height: 12px; max-width: 100%; }
+.vt-linha { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 13px; }
+.vt-caixa { background: var(--ds-cor-superficie, var(--ds-cor-fundo)); border: 1px solid color-mix(in srgb, currentColor 25%, transparent); height: 72px; width: 120px; }
+.vt-amostra { border: 1px dashed color-mix(in srgb, currentColor 30%, transparent); margin-top: 12px; max-width: 100%; overflow: hidden; padding: 16px; position: relative; transform: translateZ(0); }
+.vt-codigo { font-family: var(--ds-fonte-mono); font-size: 12px; margin: 8px 0 0; opacity: .8; }
+.vt-imagens { align-items: center; display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; }
+.vt-imagens figure { margin: 0; font-size: 12px; }
+.vt-imagens img { display: block; max-height: 96px; max-width: 220px; }
+.vt-captura { border: 1px solid color-mix(in srgb, currentColor 18%, transparent); display: block; height: auto; margin-top: 16px; max-width: 100%; }
+</style>
+</head>
+<body>
+<div class="vt-pagina">
+<div class="vt-topo">
+${logo}
+<h1>${nome}</h1>
+<p>${resumo}</p>
+<div class="vt-indice">${indice}</div>
+</div>
+${secoes}
+</div>
+</body>
+</html>

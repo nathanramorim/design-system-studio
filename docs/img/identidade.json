@@ -1,0 +1,14 @@
+{
+  "fundo": "#090B10",
+  "brilho": "#10303a",
+  "texto": "#EEF0F3",
+  "suave": "#A0A8B4",
+  "acento": ["#04A8B4", "#4fb3ff", "#E4B25A"],
+  "painel": "#0F1218",
+  "borda": "#1B202B",
+  "terminal_fundo": "#05070A",
+  "terminal_borda": "#2a3140",
+  "ok": "#2BC4CF",
+  "fonte": "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+  "fonte_mono": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+}

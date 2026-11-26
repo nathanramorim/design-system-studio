@@ -1,0 +1,14 @@
+{
+  "name": "design-system-studio",
+  "description": "Extrai o design system de qualquer site pela URL: DESIGN.md, tokens.css, components.css, vitrine e assets, de forma determinística.",
+  "owner": {
+    "name": "design-system-studio"
+  },
+  "plugins": [
+    {
+      "name": "design-system-studio",
+      "source": "./plugins/design-system-studio",
+      "description": "Extrai o design system de qualquer site pela URL: DESIGN.md, tokens.css, components.css, vitrine e assets, de forma determinística."
+    }
+  ]
+}
