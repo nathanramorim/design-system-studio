@@ -94,10 +94,13 @@ def coletar(cliente: Cliente, pagina: Pagina, pasta: Path, avisos: list[str]) ->
     og = pagina.meta.get("og:image", "")
     og_ativo = tentar(pagina.absoluta(og), "og-imagem", "og:image", "meta og:image") if og else None
 
-    favicons = [i for i in pagina.icones if i.rel in ("icon", "shortcut icon")]
+    icones = [i for i in pagina.icones if i.url.partition(",")[2].strip() or not i.url.startswith("data:")]
+    favicons = [i for i in icones if i.rel in ("icon", "shortcut icon")]
     favicons.sort(key=lambda i: (not (i.tipo == "image/svg+xml" or i.url.lower().endswith(".svg")), -i.tamanho))
     escolhido = None
+    tentados: set[str] = set()
     for icone in favicons:
+        tentados.add(icone.url)
         escolhido = tentar(icone.url, "favicon", "favicon", f'link rel="{icone.rel}"')
         if escolhido:
             break
@@ -106,8 +109,7 @@ def coletar(cliente: Cliente, pagina: Pagina, pasta: Path, avisos: list[str]) ->
         if not tentar(reserva, "favicon", "favicon", "/favicon.ico (sem link rel=icon)"):
             avisos.append("favicon não encontrado")
 
-    usados = {escolhido and escolhido.origem}
-    extras = [i for i in pagina.icones if _curta(i.url) not in usados]
+    extras = [i for i in icones if i.url not in tentados]
     for n, icone in enumerate(extras[:MAX_ICONES], start=1):
         tentar(icone.url, f"icone-{n}", "ícone", f'link rel="{icone.rel}"')
 

@@ -3,7 +3,7 @@
 Todas as regras são fixas e ficam escritas no `DESIGN.md` de cada saída, na coluna "Por quê".
 
 ## Cores
-1. Hex (3, 4, 6 e 8 dígitos), `rgb()`/`rgba()` (vírgula ou espaço, com `/` e porcentagem), `hsl()`/`hsla()` (deg, turn, rad e grad) e nomes básicos viram `#RRGGBB`. O conteúdo de `url()` é ignorado.
+1. Hex (3, 4, 6 e 8 dígitos), `rgb()`/`rgba()` (vírgula ou espaço, com `/` e porcentagem), `hsl()`/`hsla()` (deg, turn, rad e grad) e nomes básicos viram `#RRGGBB`. O conteúdo de `url()` é ignorado e `light-dark(claro, escuro)` conta o tom claro.
 2. `var(--x, reserva)` é resolvido pelas custom properties do `:root`, `html` e `body` (as de outros seletores só entram se faltarem), até 8 níveis. Sem isso, em sites com tokens, cada cor apareceria uma vez só.
 3. Contam as propriedades de cor (`color`, fundos, bordas, `outline`, `fill`, `stroke`, sombras) das folhas e dos atributos `style`. Cores com transparência vão para uma lista à parte.
 4. **Fundo:** o `background` do `html`, `body` ou `:root` fora de `@media`; senão, a cor mais usada em fundos; senão, branco.

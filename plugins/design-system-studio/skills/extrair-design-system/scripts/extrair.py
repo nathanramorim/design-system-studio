@@ -123,12 +123,12 @@ def extrair(args) -> tuple[Extracao, Path, list[tuple[str, str, str]]]:
     p = paleta.papeis
     linhas.append((
         "OK", "cores",
-        f"{len(paleta.cores)} cores; fundo {p['fundo'].hex}, texto {p['texto'].hex}, "
+        f"{_plural(len(paleta.cores), 'cor', 'cores')}; fundo {p['fundo'].hex}, texto {p['texto'].hex}, "
         f"primária {p['primaria'].hex}, destaque {p['destaque'].hex}",
     ))
     nomes = {"texto": "texto", "titulos": "títulos", "mono": "código"}
     familias = ", ".join(f"{f.familia} ({nomes[papel]})" for papel, f in tipos.papeis.items())
-    linhas.append(("OK", "fontes", f"{familias}; {len(tipos.tamanhos)} tamanhos"))
+    linhas.append(("OK", "fontes", f"{familias}; {_plural(len(tipos.tamanhos), 'tamanho', 'tamanhos')}"))
     linhas.append(("OK", "medidas", ", ".join(_plural(len(v), s, p) for v, s, p in (
         (med.raios, "raio", "raios"), (med.sombras, "sombra", "sombras"), (med.espacos, "espaço", "espaços")))))
     resumo_comp = ", ".join(f"{c.nome.lower()} {len(c.regras)}" for c in comps) or "nenhum reconhecido"

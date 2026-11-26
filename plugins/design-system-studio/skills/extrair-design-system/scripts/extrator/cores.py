@@ -109,9 +109,28 @@ def _funcao(nome: str, argumentos: str) -> tuple[str, float] | None:
     return _hex(r * 255, g * 255, b * 255), alfa
 
 
+def tom_claro(valor: str) -> str:
+    """Troca light-dark(claro, escuro) pelo tom claro, que é o padrão do navegador."""
+    while (j := valor.lower().find("light-dark(")) >= 0:
+        nivel, k, virgula = 0, j + 10, -1
+        while k < len(valor):
+            if valor[k] == "(":
+                nivel += 1
+            elif valor[k] == ")":
+                nivel -= 1
+                if nivel == 0:
+                    break
+            elif valor[k] == "," and nivel == 1 and virgula < 0:
+                virgula = k
+            k += 1
+        claro = valor[j + 11 : virgula if virgula > 0 else k]
+        valor = valor[:j] + claro.strip() + valor[k + 1 :]
+    return valor
+
+
 def cores_em(valor: str) -> list[tuple[str, float]]:
-    """Cores de um valor CSS como (#RRGGBB, alfa). Ignora o conteúdo de url()."""
-    valor = URL.sub(" ", valor)
+    """Cores de um valor CSS como (#RRGGBB, alfa). Ignora o conteúdo de url() e conta o tom claro de light-dark()."""
+    valor = URL.sub(" ", tom_claro(valor))
     achadas: list[tuple[str, float]] = []
     for m in HEX.finditer(valor):
         h = m.group(1)

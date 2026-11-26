@@ -130,3 +130,12 @@ def test_site_minimo_sem_logo_nem_css_externo(tmp_path):
     vitrine = (tmp_path / "index.html").read_text(encoding="utf-8")
     assert "Nenhum logo, favicon ou ícone encontrado." in vitrine
     assert "logo não encontrado" in (tmp_path / "DESIGN.md").read_text(encoding="utf-8")
+
+
+def test_favicon_vazio_e_ignorado_sem_tentar_duas_vezes(tmp_path):
+    pagina = '<html><head><link rel="icon" href="data:,"><title>Vazio</title></head><body></body></html>'
+    with servidor({"/": responder(200, pagina)}) as url:
+        r = extrair(url, tmp_path, "--json")
+    avisos = json.loads(r.stdout)["avisos"]
+    assert not any("data:" in a for a in avisos), avisos
+    assert sum("favicon.ico" in a for a in avisos) == 1

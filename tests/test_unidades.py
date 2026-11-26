@@ -102,3 +102,8 @@ def test_svg_inline_do_cabecalho_preserva_maiusculas():
     assert cabecalho and logo
     assert "<linearGradient" in markup and "</linearGradient>" in markup and "viewBox" in markup
     assert "alert" not in markup
+
+
+def test_light_dark_conta_o_tom_claro():
+    assert cores.cores_em("light-dark(#eee, #222)") == [("#EEEEEE", 1.0)]
+    assert cores.cores_em("1px solid light-dark(rgb(0 0 0 / .1), rgb(255 255 255 / .1))") == [("#000000", 0.1)]
