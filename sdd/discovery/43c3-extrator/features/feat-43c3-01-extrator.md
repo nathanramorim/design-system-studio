@@ -2,7 +2,7 @@
 
 **Branch:** `feat/43c3-extrator` (única da iniciativa)
 **Depende de:** Gate 1 (pedido direto do dono em 25/11/2026)
-**Status:** `queued`
+**Status:** `review_pending`
 **Origem:** `sdd/discovery/43c3-extrator/plan.md`
 
 ## Objetivo
@@ -30,6 +30,6 @@ ARQ-04, ARQ-06, COD-01, COD-03, SEG-01, SEG-05, TST-01
 uv run --with pytest pytest -q tests/test_extracao.py tests/test_seguranca.py tests/test_vitrine.py tests/test_unidades.py
 uv run --with ruff ruff check
 ```
-- [ ] cores, fontes, tokens, componentes e logo extraídos do site fictício
-- [ ] limites de bytes e de tempo; recusa de endereço privado
-- [ ] vitrine válida e saída determinística
+- [x] cores, fontes, tokens, componentes e logo extraídos do site fictício
+- [x] limites de bytes e de tempo; recusa de endereço privado
+- [x] vitrine válida e saída determinística

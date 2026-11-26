@@ -1,0 +1,27 @@
+[project]
+name = "design-system-studio"
+version = "0.1.0"
+description = "Extrai o design system de qualquer site pela URL: DESIGN.md, tokens.css, components.css, vitrine e assets, de forma determinística."
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3",
+  "ruff>=0.8",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 130
+target-version = "py311"
+extend-exclude = [".agents", ".claude", ".forge", ".gemini", "sdd", "scripts/pr_guard.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+ignore = ["E501"]
