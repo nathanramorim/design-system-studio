@@ -3,7 +3,7 @@
   "branch": "feat/43c3-extrator",
   "base_branch": "main",
   "spec_status": "reviewed",
-  "updated_at": "2026-11-26T03:27:23Z",
+  "updated_at": "2026-11-26T03:29:58Z",
   "items": [
     {
       "task_id": "43c3-01",
@@ -27,7 +27,7 @@
       "task_id": "43c3-02",
       "title": "feat-43c3-02: Skill, referências e comando",
       "spec_path": "sdd/discovery/43c3-extrator/features/feat-43c3-02-skill.md",
-      "status": "queued",
+      "status": "review_pending",
       "depends_on": [
         "feat-43c3-01"
       ],
@@ -38,7 +38,7 @@
         "DUP-01"
       ],
       "skills_used": [],
-      "attempts": 0
+      "attempts": 1
     },
     {
       "task_id": "43c3-03",

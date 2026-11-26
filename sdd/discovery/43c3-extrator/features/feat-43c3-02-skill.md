@@ -2,7 +2,7 @@
 
 **Branch:** `feat/43c3-extrator` (única da iniciativa)
 **Depende de:** feat-43c3-01
-**Status:** `queued`
+**Status:** `review_pending`
 **Origem:** `sdd/discovery/43c3-extrator/plan.md`
 
 ## Objetivo
@@ -29,5 +29,5 @@ ARQ-06, COD-05, DUP-01
 ```bash
 uv run --with pytest pytest -q tests/test_skill.py
 ```
-- [ ] frontmatter com nome e descrição até 1.024 caracteres
-- [ ] toda referência citada existe e toda referência existente é citada
+- [x] frontmatter com nome e descrição até 1.024 caracteres
+- [x] toda referência citada existe e toda referência existente é citada
