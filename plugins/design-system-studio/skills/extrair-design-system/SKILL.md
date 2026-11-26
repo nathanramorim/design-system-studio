@@ -7,7 +7,7 @@ description: Use quando a pessoa quiser extrair, copiar como referência, docume
 
 A extração é **determinística**: a mesma URL gera a mesma saída, e cada papel (fundo, texto, primária, destaque) vem de uma regra que o `DESIGN.md` explica. A IA não inventa cor nem fonte: ela revisa o que o script achou e completa o que só um leitor humano vê (decisões e tom).
 
-`SKILL` abaixo é a pasta desta skill, onde está este arquivo. Rode sempre com `uv`, nunca com pip. O script só usa a stdlib e declara isso no cabeçalho (PEP 723).
+`SKILL` abaixo é a pasta desta skill, onde está este arquivo. Rode com `uv`, nunca com pip. O script só usa a stdlib e declara isso no cabeçalho (PEP 723); onde não houver `uv` (como no app do Claude, claude.ai), rode com `python3` (3.11 ou mais) no lugar de `uv run`. O script precisa de acesso à internet para baixar o site: se a rede estiver bloqueada, peça à pessoa para liberar o acesso de rede nas configurações.
 
 ## Antes de começar
 - **Confirme o site e o uso:** a URL exata (com ou sem `www`), a pasta de saída e para que serve (refazer o próprio site, estudar uma referência, montar uma proposta).

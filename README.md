@@ -66,6 +66,33 @@ claude plugin marketplace add nathanramorim/design-system-studio
 claude plugin install design-system-studio@design-system-studio --scope user
 ```
 
+### No app do Claude (claude.ai, na web ou no desktop)
+
+As skills do Claude Code não passam sozinhas para o app: lá a skill entra por upload de um ZIP.
+
+1. **Baixe o ZIP** da última versão: [extrair-design-system.zip](https://github.com/nathanramorim/design-system-studio/releases/latest/download/extrair-design-system.zip) (também na página de [Releases](https://github.com/nathanramorim/design-system-studio/releases)). Não descompacte: o claude.ai recebe o ZIP como está.
+
+   Se preferir gerar você mesmo (a pasta da skill fica na raiz, como o claude.ai pede):
+   ```bash
+   gh repo clone nathanramorim/design-system-studio
+   cd design-system-studio
+   uv run scripts/empacotar.py        # ou: python3 scripts/empacotar.py
+   ```
+   O arquivo sai em `dist/extrair-design-system.zip`.
+2. **Ligue a execução de código:** em Settings > Capabilities, ative **Code execution and file creation**.
+3. **Libere a internet para o script**, que precisa baixar o site analisado:
+   - nos planos individuais (Pro, Max), ative **Allow network egress** na mesma tela;
+   - em Team e Enterprise, o owner escolhe a rede: **All domains**, ou a lista de domínios que você vai analisar.
+4. **Envie a skill:** em **Customize > Skills**, clique em **+ > Create skill > Upload a skill** e escolha o ZIP.
+5. **Use:** numa conversa, peça por exemplo "extrai o design system de https://www.site.com.br".
+
+O que muda no app:
+- lá pode não existir `uv`; a skill roda com `python3` (3.11 ou mais), porque o script só usa a biblioteca padrão;
+- sem acesso à internet liberado, a extração falha na rede (o script avisa);
+- a captura de tela (`--captura`) depende de um Chrome, que o ambiente do app em geral não tem: use sem ela.
+
+Fontes (consultadas em 26/11/2026): [usar skills no Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude), [criar skills personalizadas](https://support.claude.com/en/articles/12512198-how-to-create-custom-skills) e [criar e editar arquivos (rede)](https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude).
+
 ### No agy (Antigravity), ou como skill pessoal
 
 ```bash
@@ -149,6 +176,15 @@ Códigos de saída: **0** estrutura gerada, **1** a página não veio (rede, lim
 uv run --with ruff ruff check
 uv run --with pytest pytest -q
 ```
+
+Para publicar uma versão nova com o ZIP do claude.ai (troque a versão em `plugin.json`, `pyproject.toml` e na release note antes):
+
+```bash
+uv run scripts/empacotar.py
+gh release create vX.Y.Z dist/extrair-design-system.zip --title "vX.Y.Z" --notes-file <notas.md>
+```
+
+O nome do arquivo fica sempre `extrair-design-system.zip`, para o link de download da última versão continuar valendo.
 
 Os testes servem o site fictício com `http.server` num thread. Sem CI: a validação é local. O repositório segue o Forge SDD (`sdd/`); a especificação desta versão está em `sdd/discovery/43c3-extrator/`.
 
