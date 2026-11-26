@@ -70,7 +70,9 @@ claude plugin install design-system-studio@design-system-studio --scope user
 
 As skills do Claude Code não passam sozinhas para o app: lá a skill entra por upload de um ZIP.
 
-1. **Gere o ZIP** (a pasta da skill fica na raiz, como o claude.ai pede):
+1. **Baixe o ZIP** da última versão: [extrair-design-system.zip](https://github.com/nathanramorim/design-system-studio/releases/latest/download/extrair-design-system.zip) (também na página de [Releases](https://github.com/nathanramorim/design-system-studio/releases)). Não descompacte: o claude.ai recebe o ZIP como está.
+
+   Se preferir gerar você mesmo (a pasta da skill fica na raiz, como o claude.ai pede):
    ```bash
    gh repo clone nathanramorim/design-system-studio
    cd design-system-studio
@@ -174,6 +176,15 @@ Códigos de saída: **0** estrutura gerada, **1** a página não veio (rede, lim
 uv run --with ruff ruff check
 uv run --with pytest pytest -q
 ```
+
+Para publicar uma versão nova com o ZIP do claude.ai (troque a versão em `plugin.json`, `pyproject.toml` e na release note antes):
+
+```bash
+uv run scripts/empacotar.py
+gh release create vX.Y.Z dist/extrair-design-system.zip --title "vX.Y.Z" --notes-file <notas.md>
+```
+
+O nome do arquivo fica sempre `extrair-design-system.zip`, para o link de download da última versão continuar valendo.
 
 Os testes servem o site fictício com `http.server` num thread. Sem CI: a validação é local. O repositório segue o Forge SDD (`sdd/`); a especificação desta versão está em `sdd/discovery/43c3-extrator/`.
 
