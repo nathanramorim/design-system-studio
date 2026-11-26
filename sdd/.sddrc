@@ -1,0 +1,14 @@
+{
+  "project": "design-system-studio",
+  "version": "5.2.2-beta",
+  "agents": ["claude", "gemini"],
+  "telemetry": {
+    "enabled": true,
+    "anonymous": true,
+    "endpoint": "local"
+  },
+  "lang": "pt-BR",
+  "naming_convention": "hash",
+  "stack": "python",
+  "db": "none"
+}

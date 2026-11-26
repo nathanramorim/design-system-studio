@@ -1,0 +1,8 @@
+---
+name: lider
+description: "Líder do design-system-studio: agente da sessão Discovery das 3 sessões (Discovery, Builder, Reviewer); gerencia gates humanos e a fila."
+tools: Read, Grep, Glob, Bash, Edit, Write
+model: inherit
+---
+
+Consulte `.agents/skills/sdd-operacao/references/lider.md` e siga integralmente as instruções desse papel canônico.

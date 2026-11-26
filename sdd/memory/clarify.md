@@ -1,0 +1,39 @@
+# Clarify — design-system-studio
+
+Lógica única, referenciada por `/nova-feature`, `/novo-fix` e `/discovery` (nos três agentes) para decidir quando esclarecer uma dúvida sobre a descrição recebida antes de agir — evita a mesma heurística duplicada em 3+ prompts, e evita tanto o silêncio total (agir sobre suposição não confirmada) quanto a pergunta forçada em pedidos já claros.
+
+## Quando perguntar (sinais objetivos)
+
+Antes de iniciar o passo seguinte do comando (criação de branch em `/nova-feature`/`/novo-fix`, ou produção dos três artefatos em `/discovery`), avalie a descrição recebida do usuário contra estes sinais:
+
+1. **Critério de aceitação ausente ou implícito** — não dá para saber, a partir da descrição, como validar que a tarefa terminou.
+2. **Escopo com mais de uma interpretação plausível** — a descrição admite pelo menos duas leituras razoavelmente diferentes de "o que construir".
+3. **Dependência externa não mencionada** — a tarefa parece depender de outro sistema, decisão ou artefato (ex: outra feature, uma API externa, uma escolha de arquitetura) que não foi citado.
+
+## Como agir
+
+- **Nenhum sinal detectado:** siga direto, sem pergunta forçada. Descrições já claras e completas não geram fricção.
+- **Algum sinal detectado:** faça uma rodada objetiva de perguntas ao usuário (curta, focada nos sinais encontrados — não um questionário genérico) antes de prosseguir. Registre a resposta recebida no artefato criado (spec de feature/fix, ou discovery), para não perder o contexto que motivou a pergunta.
+- Este passo é **condicional, não obrigatório a cada invocação** — não é um checklist a marcar sempre, é um filtro que só ativa quando há lacuna real.
+
+## Como perguntar
+
+Quando há lacuna e uma pergunta precisa ser feita:
+
+- **No Claude Code (agentes):** use `AskUserQuestion` para toda pergunta de múltipla escolha ou sim/não — apresente 2–4 opções objetivas. Reserve texto plano apenas para respostas abertas sem alternativas fixas.
+- **No forge CLI:** use `env.p.Select` ou `env.p.Confirm` (interface `Prompter`/huh). Não use `fmt.Scan`, `fmt.Scanf` nem leitura direta de `os.Stdin`.
+- **Outros agentes (Gemini, Copilot):** siga o mecanismo interativo da ferramenta; se não houver equivalente, plain text é aceitável.
+
+## Visualização pós-spec
+
+Ao concluir `/discovery`, `/nova-feature`, `/novo-fix` ou `/split-features`, antes do Gate 1, apresente um AskUserQuestion:
+
+**Opções:**
+- **Abrir pasta no Finder** — `open sdd/discovery/<id>-<nome>/` (macOS-only; omitir em Linux/Windows)
+- **Abrir no VS Code** — `command -v code && code sdd/discovery/<id>-<nome>/`; se `code` não estiver no PATH, use Finder como fallback; se ambos indisponíveis, omitir esta opção
+- **Ver lista dos arquivos** — liste os arquivos em `sdd/discovery/<id>-<nome>/`
+- **Pular** — continua sem abrir nada
+
+Execute apenas a ação escolhida. Depois, prossiga normalmente ao Gate 1.
+
+**Nota:** `open` é nativo no macOS. Em outros sistemas, omita a opção "Finder". Para renderizar Mermaid no VS Code, o usuário precisa da extensão `bierner.markdown-mermaid`.
