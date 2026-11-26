@@ -1,6 +1,6 @@
 # Overview — design-system-studio
 
-[2-3 linhas descrevendo o sistema]
+Plugin com a skill `extrair-design-system`. O script `extrair.py` lê um site público pela URL e gera a estrutura de design system (`DESIGN.md`, `tokens.css`, `components.css`, vitrine `index.html` e `assets/`), de forma determinística e sem IA. A IA revisa e completa.
 
 ## Índice
 - `stack.md` — tecnologias
