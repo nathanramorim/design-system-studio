@@ -140,3 +140,42 @@ def test_pagina_que_nao_e_html_sai_1(tmp_path):
         r = extrair(url, tmp_path)
     assert r.returncode == 1
     assert "não é HTML" in r.stderr
+
+
+def test_tenta_o_proximo_endereco_quando_o_primeiro_nao_conecta(monkeypatch):
+    import socket
+
+    from extrator import rede
+
+    with servir_pasta(EXEMPLO) as url:
+        porta = int(url.rsplit(":", 1)[1].strip("/"))
+
+        real = socket.getaddrinfo
+
+        def falso(host, port, *args, **kwargs):
+            if host != "exemplo.invalid":
+                return real(host, port, *args, **kwargs)
+            return [
+                (socket.AF_INET6, socket.SOCK_STREAM, 6, "", ("0:0:0:0:0:0:0:1", porta, 0, 0)),
+                (socket.AF_INET, socket.SOCK_STREAM, 6, "", ("127.0.0.1", porta)),
+            ]
+
+        monkeypatch.setattr(rede.socket, "getaddrinfo", falso)
+        resposta = rede.Cliente(permitir_local=True).baixar(f"http://exemplo.invalid:{porta}/")
+    assert resposta.status == 200 and b"Oficina Exemplo" in resposta.corpo
+
+
+def test_ordem_do_sistema_e_preservada(monkeypatch):
+    import socket
+
+    from extrator import rede
+
+    def falso(host, port, *args, **kwargs):
+        return [
+            (socket.AF_INET, socket.SOCK_STREAM, 6, "", ("93.184.215.14", port)),
+            (socket.AF_INET6, socket.SOCK_STREAM, 6, "", ("2606:2800:21f:cb07:6820:80da:af6b:8b2c", port, 0, 0)),
+            (socket.AF_INET, socket.SOCK_STREAM, 6, "", ("93.184.215.14", port)),
+        ]
+
+    monkeypatch.setattr(rede.socket, "getaddrinfo", falso)
+    assert rede.resolver("exemplo.invalid", 443) == ["93.184.215.14", "2606:2800:21f:cb07:6820:80da:af6b:8b2c"]

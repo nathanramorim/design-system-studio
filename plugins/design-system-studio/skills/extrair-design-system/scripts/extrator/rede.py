@@ -89,7 +89,7 @@ def resolver(host: str, porta: int, permitir_local: bool = False) -> list[str]:
         infos = socket.getaddrinfo(host, porta, type=socket.SOCK_STREAM)
     except (socket.gaierror, UnicodeError) as erro:
         raise FalhaDeRede(f"não foi possível resolver {host}: {erro}") from erro
-    ips = sorted({info[4][0] for info in infos})
+    ips = list(dict.fromkeys(info[4][0] for info in infos))
     if not ips:
         raise FalhaDeRede(f"{host} não tem endereço")
     for ip in ips:
@@ -98,18 +98,30 @@ def resolver(host: str, porta: int, permitir_local: bool = False) -> list[str]:
 
 
 class _Conexao(http.client.HTTPConnection):
-    """Conexão para um IP já conferido, com o nome original no Host e no TLS (SNI e certificado)."""
+    """Conexão para os IPs já conferidos (na ordem do sistema, um após o outro), com o nome original no Host e no TLS."""
 
-    def __init__(self, host: str, porta: int, ip: str, tempo: float, tls: bool, permitir_local: bool):
+    def __init__(self, host: str, porta: int, ips: list[str], tempo: float, tls: bool, permitir_local: bool):
         super().__init__(host, porta, timeout=tempo)
-        self._ip, self._tls, self._permitir_local = ip, tls, permitir_local
+        self._ips, self._tls, self._permitir_local = ips, tls, permitir_local
 
     def connect(self) -> None:
-        sock = socket.create_connection((self._ip, self.port), self.timeout)
-        conferir_ip(sock.getpeername()[0], self._permitir_local)
-        if self._tls:
-            sock = ssl.create_default_context().wrap_socket(sock, server_hostname=self.host)
-        self.sock = sock
+        ultimo: OSError | None = None
+        for ip in self._ips:
+            try:
+                sock = socket.create_connection((ip, self.port), self.timeout)
+            except OSError as erro:
+                ultimo = erro
+                continue
+            try:
+                conferir_ip(sock.getpeername()[0], self._permitir_local)
+            except EnderecoRecusado:
+                sock.close()
+                raise
+            if self._tls:
+                sock = ssl.create_default_context().wrap_socket(sock, server_hostname=self.host)
+            self.sock = sock
+            return
+        raise ultimo or OSError(f"nenhum endereço de {self.host} respondeu")
 
 
 def _tipo_e_charset(cabecalho: str | None) -> tuple[str, str | None]:
@@ -154,12 +166,12 @@ class Cliente:
         partes = validar_url(url)
         esquema = partes.scheme.lower()
         porta = partes.port or PORTAS_PADRAO[esquema]
-        ip = resolver(partes.hostname, porta, self.permitir_local)[0]
+        ips = resolver(partes.hostname, porta, self.permitir_local)
         caminho = urllib.parse.urlunsplit(("", "", partes.path or "/", partes.query, ""))
         restante = prazo - time.monotonic()
         if restante <= 0:
             raise LimiteExcedido(f"passou do limite de tempo de {self.limites.tempo:g} s em {url}")
-        conexao = _Conexao(partes.hostname, porta, ip, restante, esquema == "https", self.permitir_local)
+        conexao = _Conexao(partes.hostname, porta, ips, restante, esquema == "https", self.permitir_local)
         try:
             conexao.request(
                 "GET",
